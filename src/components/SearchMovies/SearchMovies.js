@@ -14,8 +14,8 @@ export default function SearchMovies({ onSubmit }) {
    const handleSubmit = (e) => {
     e.preventDefault();
      
-     onSubmit(query);
-     //setQuery('');
+    onSubmit(query);
+    setQuery('');
 
  
   }

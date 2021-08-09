@@ -1,34 +1,38 @@
 //import s from "./List.module.css";
 //import PropTypes from "prop-types";
-import { useHistory, useLocation  } from "react-router-dom";
-
+import {  useHistory, useLocation } from "react-router-dom";
 import SearchMovies from "../SearchMovies/SearchMovies";
 import List from '../List/List'
 import { fetchSearchMovies } from "../../services/themoviedb-api";
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 
 
 
 function MoviesPage() {
-  const location = useLocation();
   const history = useHistory();
-
+  const location = useLocation();
+  
   const [query, setQuery] = useState('');
   const [moviesArr, setMoviesArr] = useState([]);
 
   useEffect(() => {
-    fetchSearchMovies(query).then(res=>setMoviesArr(res.data.results))
-  }, [query])
+    if (query === '') return;
+    fetchSearchMovies(query).then(res => setMoviesArr(res.data.results))
+  }, [query]);
   
   const onClick = (data) => {
-
-    history.push({
-      ...location,
-      search: `query=${data}&page=${1}`,
-    });
-
+    history.push({ ...location,  search: `query=${data}` })
     setQuery(data);
   }
+  
+
+  useEffect(() => {
+    const backSaerch = new URLSearchParams(location.search).get("query");
+    if (backSaerch !== null) {
+      fetchSearchMovies(backSaerch).then(res => setMoviesArr(res.data.results));
+    }
+     
+  }, [location])
 
   
 
