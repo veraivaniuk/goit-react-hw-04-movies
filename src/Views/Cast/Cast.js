@@ -1,6 +1,8 @@
 import {fetchCast} from '../../services/themoviedb-api';
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import s from './Cast.module.css'
+import img from '../../images/film.png';
 
 export const Cast = () => {
     const {movieId} = useParams();
@@ -11,10 +13,10 @@ export const Cast = () => {
     }, [movieId])
 
     return (
-        <ul>
+        <ul className={ s.cast }>
             {actors?.map(({ id, profile_path, name, character }) => {
-                return (<li key={id}>
-                    <img src={"https://image.tmdb.org/t/p/w200"+profile_path} alt={name} />
+                return (<li key={id} className={s.item} >
+                    <img src={profile_path ?`https://image.tmdb.org/t/p/w200${profile_path}`: img } alt={name} />
                     <p>{name}</p>
                     <p>Character: {character}</p>
                 </li>)

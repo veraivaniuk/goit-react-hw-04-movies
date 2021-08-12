@@ -1,11 +1,11 @@
 import { fetchReviews } from '../../services/themoviedb-api';
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import s from './Review.module.css'
 
 export const Review = () => {
     const {movieId} = useParams();
     const [description, setDescription] = useState([]);
-    console.log(movieId);
   
     useEffect(() => {
         fetchReviews(movieId).then(res=>setDescription(res.data.results))
@@ -13,7 +13,7 @@ export const Review = () => {
 
     return (
         <div>
-            {description?.length>0 ? <ul>
+            {description?.length>0 ? <ul className={s.reviews}>
                 {description?.map(({ id, author, content }) => {
                 return (<li key={id}>
                     <p>Author: {author}</p>

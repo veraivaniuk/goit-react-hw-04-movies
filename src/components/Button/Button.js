@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 function Button({ buttonName }) {
   return (
     <button className={s.button} type="submit">
-      <span className={s.button}>{buttonName}</span>
+      <span >{buttonName}</span>
     </button>
   );
 }
+Button.defaultProps = {
+  buttonName: PropTypes.string.isRequired,
+};
 
 Button.propTypes = {
   buttonName: PropTypes.string.isRequired,

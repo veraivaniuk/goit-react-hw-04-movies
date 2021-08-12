@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import Button from "../../components/Button/Button";
 import { useState } from "react";
 import s from './SearchMovies.module.css'
 
@@ -13,10 +13,8 @@ export default function SearchMovies({ onSubmit }) {
 
    const handleSubmit = (e) => {
     e.preventDefault();
-     
     onSubmit(query);
     setQuery('');
-
  
   }
 
